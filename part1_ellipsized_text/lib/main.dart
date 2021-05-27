@@ -1,28 +1,39 @@
-import 'package:app/part1/ellipsized_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:part1_ellipsized_text/ellipsized_text.dart';
 
-class EllipsizedDemo extends StatefulWidget {
-  const EllipsizedDemo();
-
-  @override
-  State<StatefulWidget> createState() => _EllipsizedDemoState();
+void main() {
+  runApp(MyApp());
 }
 
-class _EllipsizedDemoState extends State {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State {
   var _width = 1.0;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 100),
-          Slider(value: _width, onChanged: (value) => setState(() => _width = value)),
-          Expanded(child: _buildText()),
-        ],
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Material(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 100),
+                Slider(value: _width, onChanged: (value) => setState(() => _width = value)),
+                Expanded(child: _buildText()),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
