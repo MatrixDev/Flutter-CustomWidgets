@@ -1,16 +1,13 @@
-# part1_ellipsized_text
+# Flutter - Custom Widgets
 
-A new Flutter project.
+## Part 1 - EllipsizedText
 
-## Getting Started
+[Writing custom Widgets in Flutter (Part 1) — EllipsizedText](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-1-ellipsizedtext-a0efdc1368a8)
 
-This project is a starting point for a Flutter application.
+![part1_example](part1-example.gif)
 
-A few resources to get you started if this is your first Flutter project:
+## Part 2 - SingleChildRenderObjectWidget
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+[Writing custom Widgets in Flutter (Part 2) — SingleChildRenderObjectWidget](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-1-ellipsizedtext-a0efdc1368a8)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![part2_example](part2-example.gif)
