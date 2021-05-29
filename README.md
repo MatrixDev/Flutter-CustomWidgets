@@ -8,6 +8,6 @@
 
 ## Part 2 - SingleChildRenderObjectWidget
 
-[Writing custom Widgets in Flutter (Part 2) — SingleChildRenderObjectWidget](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-1-ellipsizedtext-a0efdc1368a8)
+[Writing custom Widgets in Flutter (Part 2) — SingleChildRenderObjectWidget](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-2-singlechildrenderobjectwidget-5637fecdf9bb)
 
 ![part2_example](part2-example.gif)
