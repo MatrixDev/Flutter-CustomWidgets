@@ -1,20 +1,21 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:custom_widgets/demo_widget.dart';
-import 'package:custom_widgets/part2a_child_size/child_size.dart';
+import 'package:custom_widgets/part2b_child_size/child_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class OverflowToolbarDemo extends DemoWidget {
-  final title = 'Part 4 - OverflowToolbar (TODO)';
-  
-  const OverflowToolbarDemo();
+class ChildSizeDemoB extends StatefulWidget implements DemoWidget {
+  final title = 'Part 2.b - ChildSize (no helpers)';
+
+  const ChildSizeDemoB();
 
   @override
-  DemoWidgetState createState() => _OverflowToolbarDemoState();
+  DemoWidgetState createState() => _ChildSizeDemoBState();
 }
 
-class _OverflowToolbarDemoState extends DemoWidgetState {
+class _ChildSizeDemoBState extends DemoWidgetState {
   var _fraction = 1.0;
   var _size = Size.zero;
 
@@ -34,7 +35,9 @@ class _OverflowToolbarDemoState extends DemoWidgetState {
   Widget _buildContent() {
     return ChildSize(
       child: _buildImage(),
-      onChildSizeChanged: (size) => setState(() => _size = size),
+      onChildSizeChanged: (size) => scheduleMicrotask(() {
+        setState(() => _size = size);
+      }),
     );
   }
 
@@ -49,4 +52,5 @@ class _OverflowToolbarDemoState extends DemoWidgetState {
         ),
       );
     });
-  }}
+  }
+}

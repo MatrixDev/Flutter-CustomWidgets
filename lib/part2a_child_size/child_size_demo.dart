@@ -2,20 +2,20 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:custom_widgets/demo_widget.dart';
-import 'package:custom_widgets/part2_child_size/child_size.dart';
+import 'package:custom_widgets/part2a_child_size/child_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ChildSizeDemo extends StatefulWidget implements DemoWidget {
-  final title = 'Part 2 - ChildSize';
+class ChildSizeDemoA extends StatefulWidget implements DemoWidget {
+  final title = 'Part 2.a - ChildSize';
 
-  const ChildSizeDemo();
+  const ChildSizeDemoA();
 
   @override
-  DemoWidgetState createState() => _ChildSizeDemoState();
+  DemoWidgetState createState() => _ChildSizeDemoAState();
 }
 
-class _ChildSizeDemoState extends DemoWidgetState {
+class _ChildSizeDemoAState extends DemoWidgetState {
   var _fraction = 1.0;
   var _size = Size.zero;
 

@@ -2,7 +2,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class ChildSize extends SingleChildRenderObjectWidget {
-  // ...
   final void Function(Size)? onChildSizeChanged;
 
   const ChildSize({
@@ -23,7 +22,6 @@ class ChildSize extends SingleChildRenderObjectWidget {
 }
 
 class RenderChildSize extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
-  // ...
   var _lastSize = Size.zero;
   var _widget = const ChildSize();
 
