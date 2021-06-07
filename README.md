@@ -9,6 +9,7 @@
 ## Part 2 - ChildSize / SingleChildRenderObjectWidget
 
 [Writing custom Widgets in Flutter (Part 2.a) — ChildSize (with helpers)](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-2-singlechildrenderobjectwidget-5637fecdf9bb)
+
 [Writing custom Widgets in Flutter (Part 2.b) — ChildSize (no helpers)](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-2-b-childsize-no-helpers-61c578c9bbd2)
 
 ![part2_example](part2-example.gif)
