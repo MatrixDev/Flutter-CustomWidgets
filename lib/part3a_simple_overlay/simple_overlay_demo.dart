@@ -1,19 +1,19 @@
 import 'dart:math';
 
 import 'package:custom_widgets/demo_widget.dart';
-import 'package:custom_widgets/part3_follow_leader/follow_leader.dart';
+import 'package:custom_widgets/part3a_simple_overlay/simple_overlay.dart';
 import 'package:flutter/material.dart';
 
-class FollowLeaderDemo extends DemoWidget {
-  final title = 'Part 3 - FollowLeader';
+class SimpleOverlayDemoA extends DemoWidget {
+  final title = 'Part 3a - FollowLeader';
 
-  const FollowLeaderDemo();
+  const SimpleOverlayDemoA();
 
   @override
-  DemoWidgetState createState() => _FollowLeaderDemoState();
+  DemoWidgetState createState() => _SimpleOverlayDemoAState();
 }
 
-class _FollowLeaderDemoState extends DemoWidgetState {
+class _SimpleOverlayDemoAState extends DemoWidgetState {
   var _size = 1.0;
 
   @override
@@ -29,9 +29,9 @@ class _FollowLeaderDemoState extends DemoWidgetState {
   }
 
   Widget _buildContent() {
-    return FollowLeader(
-      leader: _buildImage(),
-      follower: _buildOverlay(),
+    return SimpleOverlay(
+      child: _buildImage(),
+      overlay: _buildOverlay(),
     );
   }
 
@@ -51,9 +51,12 @@ class _FollowLeaderDemoState extends DemoWidgetState {
   Widget _buildOverlay() {
     return const Align(
       alignment: Alignment.bottomRight,
-      child: Text(
-        'Published on 27.06.2021',
-        style: TextStyle(color: Colors.black),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Text(
+          'Published on 07.06.2021',
+          style: const TextStyle(color: Colors.black),
+        ),
       ),
     );
   }

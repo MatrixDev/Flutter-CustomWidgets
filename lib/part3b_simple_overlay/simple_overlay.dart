@@ -3,62 +3,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-// region FollowLeader
+// region SimpleOverlay
 
-class FollowLeader extends RenderObjectWidget {
-  final Widget leader;
-  final Widget follower;
+class SimpleOverlay extends RenderObjectWidget {
+  final Widget child;
+  final Widget overlay;
 
-  const FollowLeader({
-    required this.leader,
-    required this.follower,
+  const SimpleOverlay({
+    required this.child,
+    required this.overlay,
   });
 
   @override
   RenderObjectElement createElement() {
-    return FollowLeaderElement(this);
+    return SimpleOverlayElement(this);
   }
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    return FollowLeaderRenderObject();
+    return SimpleOverlayRenderObject();
   }
 }
 
 // endregion
 
-// region FollowLeaderElement
+// region SimpleOverlayElement
 
-class FollowLeaderElement extends RenderObjectElement {
+class SimpleOverlayElement extends RenderObjectElement {
   Element? _leader;
   Element? _follower;
 
-  FollowLeaderElement(FollowLeader widget) : super(widget);
+  SimpleOverlayElement(SimpleOverlay widget) : super(widget);
 
   @override
-  FollowLeader get widget {
-    return super.widget as FollowLeader;
+  SimpleOverlay get widget {
+    return super.widget as SimpleOverlay;
   }
 
   @override
-  FollowLeaderRenderObject get renderObject {
-    return super.renderObject as FollowLeaderRenderObject;
+  SimpleOverlayRenderObject get renderObject {
+    return super.renderObject as SimpleOverlayRenderObject;
   }
 
   @override
   void mount(Element? parent, newSlot) {
     super.mount(parent, newSlot);
 
-    _leader = inflateWidget(widget.leader, true);
-    _follower = inflateWidget(widget.follower, false);
+    _leader = inflateWidget(widget.child, true);
+    _follower = inflateWidget(widget.overlay, false);
   }
 
   @override
-  void update(FollowLeader newWidget) {
+  void update(SimpleOverlay newWidget) {
     super.update(newWidget);
 
-    _leader = updateChild(_leader, newWidget.leader, true);
-    _follower = updateChild(_follower, newWidget.follower, false);
+    _leader = updateChild(_leader, newWidget.child, true);
+    _follower = updateChild(_follower, newWidget.overlay, false);
   }
 
   @override
@@ -92,22 +92,22 @@ class FollowLeaderElement extends RenderObjectElement {
 
 // endregion
 
-// region FollowLeaderChild
+// region SimpleOverlayChild
 
-class _FollowLeaderChild extends BoxParentData {
+class _SimpleOverlayChild extends BoxParentData {
   final RenderBox renderBox;
   final activePointers = <int>{};
 
   var hitTestResult = BoxHitTestResult();
 
-  _FollowLeaderChild(this.renderBox);
+  _SimpleOverlayChild(this.renderBox);
 }
 
 // endregion
 
-// region FollowLeaderRenderObject
+// region SimpleOverlayRenderObject
 
-class FollowLeaderRenderObject extends RenderBox {
+class SimpleOverlayRenderObject extends RenderBox {
   RenderBox? _leader;
   RenderBox? _follower;
 
@@ -135,7 +135,7 @@ class FollowLeaderRenderObject extends RenderBox {
 
   @override
   void setupParentData(RenderBox child) {
-    child.parentData = _FollowLeaderChild(child);
+    child.parentData = _SimpleOverlayChild(child);
   }
 
   void insertRenderObjectChild(RenderBox child, bool slot) {

@@ -2,7 +2,8 @@ import 'package:custom_widgets/demo_widget.dart';
 import 'package:custom_widgets/part1_ellipsized_text/ellipsized_text_demo.dart';
 import 'package:custom_widgets/part2a_child_size/child_size_demo.dart';
 import 'package:custom_widgets/part2b_child_size/child_size_demo.dart';
-import 'package:custom_widgets/part3_follow_leader/follow_leader_demo.dart';
+import 'package:custom_widgets/part3a_simple_overlay/simple_overlay_demo.dart';
+import 'package:custom_widgets/part3b_simple_overlay/simple_overlay_demo.dart';
 import 'package:custom_widgets/part4_overflow_toolbar/overflow_toolbar_demo.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,8 @@ class HomePage extends StatelessWidget {
             _buildItem(context, const EllipsizedTextDemo()),
             _buildItem(context, const ChildSizeDemoA()),
             _buildItem(context, const ChildSizeDemoB()),
-            _buildItem(context, const FollowLeaderDemo()),
+            _buildItem(context, const SimpleOverlayDemoA()),
+            _buildItem(context, const SimpleOverlayDemoB()),
             _buildItem(context, const OverflowToolbarDemo()),
           ],
         ),
