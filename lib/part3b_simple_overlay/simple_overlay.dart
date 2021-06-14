@@ -30,8 +30,9 @@ class SimpleOverlay extends RenderObjectWidget {
 // region SimpleOverlayElement
 
 class SimpleOverlayElement extends RenderObjectElement {
-  Element? _leader;
-  Element? _follower;
+  // ...
+  Element? _child;
+  Element? _overlay;
 
   SimpleOverlayElement(SimpleOverlay widget) : super(widget);
 
@@ -49,29 +50,37 @@ class SimpleOverlayElement extends RenderObjectElement {
   void mount(Element? parent, newSlot) {
     super.mount(parent, newSlot);
 
-    _leader = inflateWidget(widget.child, true);
-    _follower = inflateWidget(widget.overlay, false);
+    _child = inflateWidget(widget.child, true);
+    _overlay = inflateWidget(widget.overlay, false);
   }
 
   @override
   void update(SimpleOverlay newWidget) {
     super.update(newWidget);
 
-    _leader = updateChild(_leader, newWidget.child, true);
-    _follower = updateChild(_follower, newWidget.overlay, false);
+    _child = updateChild(_child, newWidget.child, true);
+    _overlay = updateChild(_overlay, newWidget.overlay, false);
+  }
+
+  @override
+  void unmount() {
+    super.unmount();
+
+    _child = null;
+    _overlay = null;
   }
 
   @override
   void visitChildren(ElementVisitor visitor) {
-    if (_leader != null) visitor(_leader!);
-    if (_follower != null) visitor(_follower!);
+    if (_child != null) visitor(_child!);
+    if (_overlay != null) visitor(_overlay!);
   }
 
   @override
   void forgetChild(Element child) {
     super.forgetChild(child);
-    if (_leader == child) _leader = null;
-    if (_follower == child) _follower = null;
+    if (_child == child) _child = null;
+    if (_overlay == child) _overlay = null;
   }
 
   @override
@@ -92,79 +101,69 @@ class SimpleOverlayElement extends RenderObjectElement {
 
 // endregion
 
-// region SimpleOverlayChild
-
-class _SimpleOverlayChild extends BoxParentData {
-  final RenderBox renderBox;
-  final activePointers = <int>{};
-
-  var hitTestResult = BoxHitTestResult();
-
-  _SimpleOverlayChild(this.renderBox);
-}
-
-// endregion
-
 // region SimpleOverlayRenderObject
 
 class SimpleOverlayRenderObject extends RenderBox {
-  RenderBox? _leader;
-  RenderBox? _follower;
+  //...
+  RenderBox? _child;
+  RenderBox? _overlay;
 
   // region Children Management
 
   @override
   void attach(covariant PipelineOwner owner) {
     super.attach(owner);
-    _leader?.attach(owner);
-    _follower?.attach(owner);
+    _child?.attach(owner);
+    _overlay?.attach(owner);
   }
 
   @override
   void detach() {
     super.detach();
-    _leader?.detach();
-    _follower?.detach();
+    _child?.detach();
+    _overlay?.detach();
   }
 
   @override
   void visitChildren(RenderObjectVisitor visitor) {
-    if (_leader != null) visitor(_leader!);
-    if (_follower != null) visitor(_follower!);
+    if (_child != null) visitor(_child!);
+    if (_overlay != null) visitor(_overlay!);
   }
 
   @override
-  void setupParentData(RenderBox child) {
-    child.parentData = _SimpleOverlayChild(child);
+  void redepthChildren() {
+    super.redepthChildren();
+    _child?.redepthChildren();
+    _overlay?.redepthChildren();
   }
 
   void insertRenderObjectChild(RenderBox child, bool slot) {
     if (slot) {
-      _leader = child;
+      _child = child;
     } else {
-      _follower = child;
+      _overlay = child;
     }
     adoptChild(child);
   }
 
   void moveRenderObjectChild(RenderBox child, bool oldSlot, bool newSlot) {
     if (oldSlot) {
-      _leader = null;
+      _child = null;
     } else {
-      _follower = null;
+      _overlay = null;
     }
     if (newSlot) {
-      _leader = child;
+      _child = child;
     } else {
-      _follower = child;
+      _overlay = child;
     }
   }
 
   void removeRenderObjectChild(RenderBox child, bool slot) {
     if (slot) {
-      _leader = null;
+      _child = null;
     } else {
-      _follower = null;
+      _overlay = null;
     }
     dropChild(child);
   }
@@ -177,18 +176,18 @@ class SimpleOverlayRenderObject extends RenderBox {
   void performLayout() {
     var followerConstraints = constraints;
 
-    final leader = _leader;
-    if (leader != null) {
-      leader.layout(constraints, parentUsesSize: true);
-      followerConstraints = BoxConstraints.tight(leader.size);
+    final child = _child;
+    if (child != null) {
+      child.layout(constraints, parentUsesSize: true);
+      followerConstraints = BoxConstraints.tight(child.size);
     }
 
-    final follower = _follower;
-    if (follower != null) {
-      follower.layout(followerConstraints, parentUsesSize: true);
+    final overlay = _overlay;
+    if (overlay != null) {
+      overlay.layout(followerConstraints, parentUsesSize: true);
     }
 
-    size = _leader?.size ?? _follower?.size ?? constraints.smallest;
+    size = _child?.size ?? _overlay?.size ?? constraints.smallest;
   }
 
   // endregion
@@ -197,11 +196,11 @@ class SimpleOverlayRenderObject extends RenderBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    if (_leader != null) {
-      context.paintChild(_leader!, offset);
+    if (_child != null) {
+      context.paintChild(_child!, offset);
     }
-    if (_follower != null) {
-      context.paintChild(_follower!, offset);
+    if (_overlay != null) {
+      context.paintChild(_overlay!, offset);
     }
   }
 
@@ -211,10 +210,10 @@ class SimpleOverlayRenderObject extends RenderBox {
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
-    if (_follower?.hitTest(result, position: position) == true) {
+    if (_overlay?.hitTest(result, position: position) == true) {
       return true;
     }
-    if (_leader?.hitTest(result, position: position) == true) {
+    if (_child?.hitTest(result, position: position) == true) {
       return true;
     }
     return false;

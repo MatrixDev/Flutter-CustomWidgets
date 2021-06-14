@@ -18,4 +18,6 @@
 
 [Writing custom Widgets in Flutter (Part 3.a) — SimpleOverlay (with helpers)](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-3a-simpleoverlay-with-helpers-6b3990db48b6)
 
+[Writing custom Widgets in Flutter (Part 3.b) — SimpleOverlay (no helpers)](https://rlesovyi.medium.com/writing-custom-widgets-in-flutter-part-3-b-simpleoverlay-no-helpers-9ddf45cea983)
+
 ![part3_example](part3-example.gif)
